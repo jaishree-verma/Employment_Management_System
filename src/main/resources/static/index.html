@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Management System | Admin Dashboard</title>
+    <meta name="description" content="Manage company employees, departments, and payroll with real-time REST API integration.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Top Navbar -->
+        <header class="navbar">
+            <div class="brand">
+                <div class="brand-icon">
+                    <i class="fa-solid fa-users-gear"></i>
+                </div>
+                <div class="brand-text">
+                    <h1>Employee Central</h1>
+                    <p>Spring Boot + JPA REST API Dashboard</p>
+                </div>
+            </div>
+            <div class="user-profile">
+                <div class="status-indicator">
+                    <span class="pulse-dot"></span>
+                    <span class="status-text">Backend Connected</span>
+                </div>
+                <div class="avatar">
+                    <i class="fa-solid fa-user-shield"></i>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Stats Dashboard Banner -->
+            <section class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon purple">
+                        <i class="fa-solid fa-user-group"></i>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-label">Total Employees</span>
+                        <h3 id="statTotalEmployees" class="stat-value">0</h3>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon blue">
+                        <i class="fa-solid fa-building-user"></i>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-label">Active Departments</span>
+                        <h3 id="statDepartments" class="stat-value">0</h3>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon green">
+                        <i class="fa-solid fa-wallet"></i>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-label">Total Payroll</span>
+                        <h3 id="statTotalPayroll" class="stat-value">₹0</h3>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon orange">
+                        <i class="fa-solid fa-chart-pie"></i>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-label">Avg. Salary</span>
+                        <h3 id="statAvgSalary" class="stat-value">₹0</h3>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Control Bar (Filter & Add Button) -->
+            <section class="control-bar">
+                <div class="search-filter-group">
+                    <div class="search-box">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="searchInput" placeholder="Search by name, email, or ID...">
+                    </div>
+                    <div class="select-box">
+                        <i class="fa-solid fa-filter"></i>
+                        <select id="departmentFilter">
+                            <option value="ALL">All Departments</option>
+                            <option value="IT">IT</option>
+                            <option value="HR">HR</option>
+                            <option value="Finance">Finance</option>
+                            <option value="Marketing">Marketing</option>
+                            <option value="Engineering">Engineering</option>
+                            <option value="Sales">Sales</option>
+                        </select>
+                    </div>
+                </div>
+                <button id="openAddModalBtn" class="btn btn-primary">
+                    <i class="fa-solid fa-plus"></i>
+                    <span>Add Employee</span>
+                </button>
+            </section>
+
+            <!-- Table Card Container -->
+            <section class="table-card">
+                <div class="table-header">
+                    <h2><i class="fa-solid fa-list-check"></i> Employee Directory</h2>
+                    <button id="refreshBtn" class="btn-icon" title="Refresh Data">
+                        <i class="fa-solid fa-arrows-rotate"></i>
+                    </button>
+                </div>
+                <div class="table-responsive">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Employee Details</th>
+                                <th>Department</th>
+                                <th>Salary</th>
+                                <th class="text-right">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="employeeTableBody">
+                            <!-- Table Rows rendered dynamically via app.js -->
+                        </tbody>
+                    </table>
+                    <div id="emptyState" class="empty-state hidden">
+                        <div class="empty-icon">
+                            <i class="fa-solid fa-folder-open"></i>
+                        </div>
+                        <h3>No Employees Found</h3>
+                        <p>No records match your search or filter criteria. Click "Add Employee" to create one.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Employee Management System &copy; 2026 | Built with Java Spring Boot, JPA & MySQL</p>
+        </footer>
+    </div>
+
+    <!-- Modal Form (Add / Edit Employee) -->
+    <div id="employeeModal" class="modal-backdrop hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3 id="modalTitle"><i class="fa-solid fa-user-plus"></i> Add New Employee</h3>
+                <button id="closeModalBtn" class="close-btn">&times;</button>
+            </div>
+            <form id="employeeForm">
+                <input type="hidden" id="empId">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="empName"><i class="fa-solid fa-user"></i> Full Name</label>
+                        <input type="text" id="empName" placeholder="e.g. Rahul Sharma" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="empEmail"><i class="fa-solid fa-envelope"></i> Email Address</label>
+                        <input type="email" id="empEmail" placeholder="e.g. rahul@gmail.com" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="empDepartment"><i class="fa-solid fa-building"></i> Department</label>
+                            <select id="empDepartment" required>
+                                <option value="" disabled selected>Select Department</option>
+                                <option value="IT">IT</option>
+                                <option value="HR">HR</option>
+                                <option value="Finance">Finance</option>
+                                <option value="Marketing">Marketing</option>
+                                <option value="Engineering">Engineering</option>
+                                <option value="Sales">Sales</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="empSalary"><i class="fa-solid fa-indian-rupee-sign"></i> Salary (₹)</label>
+                            <input type="number" id="empSalary" placeholder="e.g. 50000" min="0" step="500" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="cancelModalBtn" class="btn btn-secondary">Cancel</button>
+                    <button type="submit" id="saveEmployeeBtn" class="btn btn-primary">
+                        <i class="fa-solid fa-floppy-disk"></i> Save Employee
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Confirm Delete Modal -->
+    <div id="deleteModal" class="modal-backdrop hidden">
+        <div class="modal-card modal-sm">
+            <div class="modal-header danger">
+                <h3><i class="fa-solid fa-triangle-exclamation"></i> Confirm Delete</h3>
+                <button id="closeDeleteModalBtn" class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete <strong id="deleteEmpName">Employee</strong>?</p>
+                <p class="sub-text">This action cannot be undone.</p>
+            </div>
+            <div class="modal-footer">
+                <button id="cancelDeleteBtn" class="btn btn-secondary">Cancel</button>
+                <button id="confirmDeleteBtn" class="btn btn-danger">
+                    <i class="fa-solid fa-trash-can"></i> Delete
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications Container -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- Application Script -->
+    <script src="app.js"></script>
+</body>
+</html>
