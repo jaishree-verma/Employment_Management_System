@@ -22,7 +22,7 @@ Live Demo: https://employee-management-system-2ne1.onrender.com/
 
 ---
 
-## Problem Statement
+## Problem:
 
 Managing employee data across departments, tracking payroll allocations, and performing record updates in traditional spreadsheet-based or fragmented systems presents significant challenges:
 
@@ -33,7 +33,7 @@ Managing employee data across departments, tracking payroll allocations, and per
 
 ---
 
-## Solution
+## Solution:
 
 The Employee Management System addresses these challenges by offering a centralized, performant backend service and a responsive web client:
 
