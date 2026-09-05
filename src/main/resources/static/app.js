@@ -1,10 +1,14 @@
-// Employee Management System Client JavaScript
+// Employee Management System Client JavaScript - Black, Yellow & Light Theme
 
 const API_BASE = '/employees';
 let allEmployees = [];
 let deleteTargetId = null;
 
 // DOM Elements
+const htmlElement = document.documentElement;
+const themeToggleBtn = document.getElementById('themeToggleBtn');
+const themeLabel = document.getElementById('themeLabel');
+
 const employeeTableBody = document.getElementById('employeeTableBody');
 const emptyState = document.getElementById('emptyState');
 const searchInput = document.getElementById('searchInput');
@@ -38,14 +42,40 @@ const cancelDeleteBtn = document.getElementById('cancelDeleteBtn');
 const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
 const toastContainer = document.getElementById('toastContainer');
 
-// Initialize Dashboard
+// Initialize Dashboard & Theme
 document.addEventListener('DOMContentLoaded', () => {
+    initTheme();
     loadEmployees();
     setupEventListeners();
 });
 
+// Theme Toggle Logic
+function initTheme() {
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    setTheme(savedTheme);
+}
+
+function setTheme(theme) {
+    htmlElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+    if (theme === 'light') {
+        themeLabel.textContent = 'Dark Mode';
+    } else {
+        themeLabel.textContent = 'Light Mode';
+    }
+}
+
+function toggleTheme() {
+    const currentTheme = htmlElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+}
+
 // Event Listeners Setup
 function setupEventListeners() {
+    // Theme Switcher Trigger
+    themeToggleBtn.addEventListener('click', toggleTheme);
+
     // Refresh Button
     refreshBtn.addEventListener('click', loadEmployees);
 
@@ -94,7 +124,7 @@ async function handleDepartmentFilter() {
             if (!response.ok) throw new Error('Failed to filter department');
             const deptEmployees = await response.json();
             renderTable(deptEmployees);
-            updateStats(allEmployees); // Keep overall stats intact
+            updateStats(allEmployees);
         } catch (error) {
             console.error('Filter Error:', error);
             showToast('Error filtering by department', 'error');
@@ -136,7 +166,7 @@ function renderTable(employees) {
                 </div>
             </td>
             <td>
-                <span class="badge-dept ${escapeHtml(emp.department)}">${escapeHtml(emp.department)}</span>
+                <span class="badge-dept">${escapeHtml(emp.department)}</span>
             </td>
             <td>
                 <span class="salary-text">₹${Number(emp.salary).toLocaleString('en-IN')}</span>
@@ -205,14 +235,12 @@ async function handleFormSubmit(event) {
     try {
         let response;
         if (id) {
-            // Update existing employee (PUT /employees/{id})
             response = await fetch(`${API_BASE}/${id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
             });
         } else {
-            // Create new employee (POST /employees)
             response = await fetch(API_BASE, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },

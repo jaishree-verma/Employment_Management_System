@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,6 +28,12 @@
                 </div>
             </div>
             <div class="user-profile">
+                <!-- Theme Switcher Button -->
+                <button id="themeToggleBtn" class="theme-toggle-btn" title="Toggle Light / Dark Theme">
+                    <i class="fa-solid fa-sun icon-sun"></i>
+                    <i class="fa-solid fa-moon icon-moon"></i>
+                    <span id="themeLabel">Light Mode</span>
+                </button>
                 <div class="status-indicator">
                     <span class="pulse-dot"></span>
                     <span class="status-text">Backend Connected</span>
@@ -43,7 +49,7 @@
             <!-- Stats Dashboard Banner -->
             <section class="stats-grid">
                 <div class="stat-card">
-                    <div class="stat-icon purple">
+                    <div class="stat-icon yellow">
                         <i class="fa-solid fa-user-group"></i>
                     </div>
                     <div class="stat-info">
@@ -52,7 +58,7 @@
                     </div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-icon blue">
+                    <div class="stat-icon amber">
                         <i class="fa-solid fa-building-user"></i>
                     </div>
                     <div class="stat-info">
@@ -61,7 +67,7 @@
                     </div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-icon green">
+                    <div class="stat-icon gold">
                         <i class="fa-solid fa-wallet"></i>
                     </div>
                     <div class="stat-info">
@@ -70,7 +76,7 @@
                     </div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-icon orange">
+                    <div class="stat-icon dark-yellow">
                         <i class="fa-solid fa-chart-pie"></i>
                     </div>
                     <div class="stat-info">
