@@ -1,23 +1,23 @@
-# 🏢 Employee Management System (Spring Boot + JPA + MySQL + Web UI)
+# Employee Management System (Spring Boot + JPA + MySQL + Web UI)
 
 A full-stack Employee Management System built using **Java 23**, **Spring Boot 3.3**, **Spring Data JPA**, **MySQL / H2 Database**, and a **Dark Glassmorphic Web Dashboard**.
 
 ---
 
-## 🌟 Key Features
+## Key Features
 
-- ⚡ **RESTful API**: Full CRUD capabilities for employee records.
-- 🎨 **Glassmorphism Web Dashboard**: Responsive single-page interface with live stats, search bar, department filters, and action modals.
-- 🔍 **Department Search**: Custom JPA query to search employees by department.
-- 💾 **Dual Database Profiles**:
+-  **RESTful API**: Full CRUD capabilities for employee records.
+-  **Glassmorphism Web Dashboard**: Responsive single-page interface with live stats, search bar, department filters, and action modals.
+-  **Department Search**: Custom JPA query to search employees by department.
+-  **Dual Database Profiles**:
   - `default`: MySQL persistence (`employee_db`).
   - `h2`: Instant in-memory database with web console (`/h2-console`).
-- 📮 **Postman Collection**: Exported JSON collection (`Employee_Management_API.postman_collection.json`) for endpoint testing.
-- 🧪 **Automated Test Suite**: 100% passing MockMvc integration tests (`EmployeeControllerTest.java`).
+-  **Postman Collection**: Exported JSON collection (`Employee_Management_API.postman_collection.json`) for endpoint testing.
+-  **Automated Test Suite**: 100% passing MockMvc integration tests (`EmployeeControllerTest.java`).
 
 ---
 
-## 🛠️ Tech Stack & Layered Architecture
+##  Tech Stack & Layered Architecture
 
 ```
 Client Browser / Postman
@@ -37,7 +37,7 @@ Client Browser / Postman
 
 ---
 
-## 📡 REST API Specification
+## REST API Specification
 
 | Method | Endpoint | Description | Sample Request Body |
 | :--- | :--- | :--- | :--- |
@@ -50,7 +50,7 @@ Client Browser / Postman
 
 ---
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### 1. Clone Repository
 ```bash
@@ -85,5 +85,5 @@ No database setup needed:
 
 ---
 
-## 📄 License
+##  License
 Licensed under the [MIT License](LICENSE).
