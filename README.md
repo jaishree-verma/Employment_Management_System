@@ -1,23 +1,27 @@
-# Employee Management System (Spring Boot + JPA + MySQL + Web UI)
+# 🏢 Employee Management System (Spring Boot + JPA + MySQL + Web UI)
 
-A full-stack Employee Management System built using **Java 23**, **Spring Boot 3.3**, **Spring Data JPA**, **MySQL / H2 Database**, and a **Dark Glassmorphic Web Dashboard**.
+A full-stack Employee Management System built using **Java 23**, **Spring Boot 3.3**, **Spring Data JPA**, **MySQL / H2 Database**, and a **Black & Cyberpunk Yellow Web Dashboard**.
+
+🌐 **Live Demo**: [https://employee-management-system-2ne1.onrender.com/](https://employee-management-system-2ne1.onrender.com/)
 
 ---
 
-## Key Features
+## 🌟 Key Features
 
--  **RESTful API**: Full CRUD capabilities for employee records.
--  **Glassmorphism Web Dashboard**: Responsive single-page interface with live stats, search bar, department filters, and action modals.
--  **Department Search**: Custom JPA query to search employees by department.
--  **Dual Database Profiles**:
+- ⚡ **RESTful API**: Full CRUD capabilities for employee records.
+- 🎨 **Glassmorphism Web Dashboard**: Responsive single-page interface with live stats, search bar, department filters, and action modals.
+- 🌓 **Theme Switcher**: Black & Cyberpunk Yellow dark mode + Light Mode switcher with local storage persistence.
+- 🔍 **Department Search**: Custom JPA query to search employees by department.
+- 💾 **Dual Database Profiles**:
   - `default`: MySQL persistence (`employee_db`).
   - `h2`: Instant in-memory database with web console (`/h2-console`).
--  **Postman Collection**: Exported JSON collection (`Employee_Management_API.postman_collection.json`) for endpoint testing.
--  **Automated Test Suite**: 100% passing MockMvc integration tests (`EmployeeControllerTest.java`).
+- 📮 **Postman Collection**: Exported JSON collection (`Employee_Management_API.postman_collection.json`) for endpoint testing.
+- 🧪 **Automated Test Suite**: 100% passing MockMvc integration tests (`EmployeeControllerTest.java`).
+- 🐳 **Dockerized Cloud Deployment**: Deployed live on Render.
 
 ---
 
-##  Tech Stack & Layered Architecture
+## 🛠️ Tech Stack & Layered Architecture
 
 ```
 Client Browser / Postman
@@ -32,12 +36,12 @@ Client Browser / Postman
 ```
 
 - **Backend**: Java 23, Spring Boot 3.3, Spring Data JPA, Hibernate, Maven.
-- **Frontend**: HTML5, Vanilla CSS3 (Glassmorphism, Google Font `Outfit`), JavaScript (Fetch API).
+- **Frontend**: HTML5, Vanilla CSS3 (Black & Yellow Theme, Light Mode, Google Font `Outfit`), JavaScript (Fetch API).
 - **Database**: MySQL / H2 In-Memory.
 
 ---
 
-## REST API Specification
+## 📡 REST API Specification
 
 | Method | Endpoint | Description | Sample Request Body |
 | :--- | :--- | :--- | :--- |
@@ -50,11 +54,11 @@ Client Browser / Postman
 
 ---
 
-##  Getting Started
+## 🚀 Getting Started
 
 ### 1. Clone Repository
 ```bash
-git clone https://github.com/jaishree-verma/atomgoal.git
+git clone https://github.com/jaishree-verma/Employment_Management_System.git
 cd Employment_Management_System
 ```
 
@@ -85,5 +89,5 @@ No database setup needed:
 
 ---
 
-##  License
+## 📄 License
 Licensed under the [MIT License](LICENSE).
