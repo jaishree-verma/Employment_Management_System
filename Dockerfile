@@ -1,32 +1,24 @@
-# Build Stage
-FROM eclipse-temurin:17-jdk-alpine AS build
+# Build Stage (Using official Maven image so local wrapper scripts are not needed)
+FROM maven:3.9.9-eclipse-temurin-17-alpine AS build
 WORKDIR /app
 
-# Copy Maven wrapper & POM
-COPY mvnw .
-COPY mvnw.cmd .
-COPY .mvn .mvn
+# Copy POM file and pre-fetch dependencies
 COPY pom.xml .
+RUN mvn dependency:go-offline -B
 
-# Grant execution permission to mvnw
-RUN chmod +x mvnw
-
-# Download dependencies
-RUN ./mvnw dependency:go-offline -B
-
-# Copy source code and build package
+# Copy source code and compile project
 COPY src src
-RUN ./mvnw clean package -DskipTests
+RUN mvn clean package -DskipTests
 
-# Production Stage
+# Production Run Stage
 FROM eclipse-temurin:17-jre-alpine
 WORKDIR /app
 
-# Copy built JAR from build stage
+# Copy built Spring Boot executable JAR
 COPY --from=build /app/target/employee-management-0.0.1-SNAPSHOT.jar app.jar
 
-# Expose server port
+# Expose HTTP port
 EXPOSE 8080
 
-# Run Spring Boot Application
+# Execute Application
 ENTRYPOINT ["java", "-jar", "app.jar", "--spring.profiles.active=h2"]
