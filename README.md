@@ -1,6 +1,6 @@
 # Employee Management System
 
-A full-stack, enterprise-ready Employee Management System built with Java 23, Spring Boot 3.3, Spring Data JPA, Hibernate, MySQL/H2 Database, and a vanilla CSS Single-Page Application (SPA) Web Dashboard.
+A full-stack, enterprise-ready Employee Management System built with Java 23, Spring Boot 3.3, Spring Data JPA, Hibernate, MySQL/H2 Database, and a vanilla CSS  Web Dashboard.
 
 Live Demo: https://employee-management-system-2ne1.onrender.com/  
 
