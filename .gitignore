@@ -15,3 +15,7 @@ Thumbs.db
 # Environment & local credentials
 *.env
 *.properties.local
+
+# Python cache files
+__pycache__/
+*.pyc
